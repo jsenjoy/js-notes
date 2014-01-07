@@ -35,7 +35,7 @@
 	eventsList[id].push(callback);
 	
 	elem['on' + type] || (elem['on' + type] = function(event){
-	    var event = event || window.event;
+	    var event = eventCompatible(event);
 	    eventsList[id]['emit'](elem, event);
 	});
 	
@@ -43,12 +43,17 @@
 
     // 使用addEventListener方法来绑定
     var eventBind = function(){
-	
     };
 
     // 兼容处理event对象
-    function eventWrap(event){
-	
+    function eventCompatible(event){
+	var event = event || window.event;
+
+	if(!event.target && event.srcElement){
+	    event.target = event.srcElement;
+	}
+
+	return event;
     }
     
     window.eventOn = eventOn;

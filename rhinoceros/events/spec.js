@@ -23,7 +23,7 @@ describe("eventOn 使用设置元素属性来绑定事件", function(){
 	});
 	
 	el.trigger('click');
-	expect(mark).toEqual(true);
+	expect(mark).toBe(true);
 	
 	el.remove();
     });
@@ -46,9 +46,9 @@ describe("eventOn 使用设置元素属性来绑定事件", function(){
 
 	el.trigger('click');
 
-	expect(re[0]).toEqual(0);
-	expect(re[1]).toEqual(1);
-	expect(re[2]).toEqual(2);
+	expect(re[0]).toBe(0);
+	expect(re[1]).toBe(1);
+	expect(re[2]).toBe(2);
 
 	el.remove();
     });
@@ -69,7 +69,7 @@ describe("eventOn 使用设置元素属性来绑定事件", function(){
 
 	el.trigger('click');
 
-	expect(re).toEqual(1);
+	expect(re).toBe(1);
 
 	el.remove();
     });
@@ -92,9 +92,9 @@ describe("eventOn 使用设置元素属性来绑定事件", function(){
 
 	el.trigger('click');
 
-	expect(mark[0]).toEqual(2);
-	expect(mark[1]).toEqual(1);
-	expect(mark[2]).toEqual(0);
+	expect(mark[0]).toBe(2);
+	expect(mark[1]).toBe(1);
+	expect(mark[2]).toBe(0);
 
 	el.remove();
     });
@@ -105,6 +105,21 @@ describe("eventOn 使用设置元素属性来绑定事件", function(){
 
     it("阻止默认事件", function(){
 	
+    });
+
+    it("事件目标", function(){
+	var el = $('<a href="#aa"></a>'),
+	    mark = null;
+
+	wrap.append(el);
+	
+	eventOn(el.get(0), 'click', function(event){
+	    mark = event.target;
+	});
+
+	el.trigger('click');
+
+	expect(mark).toBe(el.get(0));
     });
 
     it("focusin, focusout 事件冒泡", function(){
