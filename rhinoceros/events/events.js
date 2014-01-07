@@ -46,6 +46,11 @@
 	
     };
 
+    // 兼容处理event对象
+    function eventWrap(event){
+	
+    }
+    
     window.eventOn = eventOn;
     window.eventBind = eventBind;
     
